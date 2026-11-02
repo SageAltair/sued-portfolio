@@ -329,4 +329,15 @@ function projectShowcase(p){let d=showcase[p.id];let mobile=['zaburi','oddly-bib
 workCard=function(p){return '<article class="showcase-card">'+projectShowcase(p)+'<div class="showcase-copy"><div class="article-kicker">'+esc(p.tag)+' / '+esc(p.status)+'</div><h2>'+esc(p.name)+'</h2><p>'+esc(p.summary)+'</p><div class="showcase-stack">'+p.stack.slice(0,4).map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+link('#/work/'+p.id,'Explore project','text-link')+'</div></article>'};
 const detailedWork=workDetail;
 workDetail=function(id){let p=projects.find(x=>x.id===id);if(!p)return notFound();return detailedWork(id).replace('<article class="detail editorial-article">','<article class="detail editorial-article">'+projectShowcase(p))};
+
+// Keep technology logos only where they are meaningful; other skills read as text.
+const originalSkillsGallery=skillsGallery;
+skillsGallery=function(){
+ const technical=skillSections.slice(0,2).map(([heading,items])=>'<div class="skill-group"><h3>'+esc(heading)+'</h3><div class="skill-matrix">'+items.map(([name,slug])=>'<div class="skill-cell"><div class="skill-graphic">'+(slug?'<img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/icons/'+slug+'/'+slug+'-original.svg" alt="">':'<span class="skill-letters">'+esc(name.slice(0,2).toUpperCase())+'</span>')+'</div><span>'+esc(name)+'</span></div>').join('')+'</div></div>').join('');
+ const others=skillSections.slice(2).map(([heading,items])=>'<div class="skill-group"><h3>'+esc(heading)+'</h3><div class="skill-text-list">'+items.map(([name])=>'<span>'+esc(name)+'</span>').join('')+'</div></div>').join('');
+ return '<section class="section skills-gallery"><div class="article-kicker">03 / CAPABILITIES</div><h2>Skills, tools and ways of working.</h2><p class="skills-disclaimer">Practical experience, academic exposure, and developing interests. Proficiency varies across disciplines.</p>'+technical+others+'</section>';
+};
+workCard=function(p){return '<article class="work-card project-text-only"><div class="article-kicker">'+esc(p.tag)+' / '+esc(p.status)+'</div><h2>'+esc(p.name)+'</h2><p>'+esc(p.summary)+'</p><div class="showcase-stack">'+p.stack.slice(0,4).map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+link('#/work/'+p.id,'Explore project','text-link')+'</article>'};
+const detailWithoutShowcase=detailedWork;
+workDetail=function(id){return detailWithoutShowcase(id)};
 render();
