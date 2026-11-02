@@ -61,3 +61,19 @@
 .case-study .editorial-article>p{margin-bottom:25px}
 
 /* Journal intentionally retired from the public portfolio. */
+
+.skills-disclaimer{max-width:760px;color:var(--muted);margin:18px 0 40px}
+.skill-group{margin:42px 0 56px}.skill-group h3{font-size:24px;margin:0 0 18px}
+.skill-matrix{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.skill-cell{min-height:148px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:17px;text-align:center;padding:18px 8px}
+.skill-cell>span{font-size:13px;line-height:1.4}.skill-graphic{height:62px;width:62px;display:grid;place-items:center}.skill-graphic img{width:57px;height:57px;object-fit:contain}
+.skill-letters{width:53px;height:53px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);font-weight:700;font-size:18px}
+.showcase-card{border:1px solid var(--line);border-radius:24px;overflow:hidden;margin:0 0 60px}.showcase-copy{padding:clamp(24px,4vw,46px)}.showcase-copy h2{font-size:clamp(28px,4vw,46px);margin:10px 0}.showcase-copy p{max-width:680px}
+.showcase-stack{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0}.showcase-stack span{border:1px solid var(--line);padding:7px 11px;border-radius:22px;font-size:12px}
+.showcase-figure{margin:0}.showcase-stage{min-height:370px;background:#e9edf0;display:flex;align-items:center;justify-content:center;padding:34px;overflow:hidden}.showcase-device{background:#182337;padding:8px;box-shadow:0 24px 55px #14203433}.showcase-desktop{width:min(100%,680px);border-radius:14px}.showcase-phone{width:230px;border-radius:30px;padding:9px}
+.showcase-screen{background:#f9fbfc;color:#192d43;min-height:280px;border-radius:8px;overflow:hidden}.showcase-phone .showcase-screen{min-height:330px;border-radius:23px}
+.showcase-top{padding:15px 20px;border-bottom:1px solid #dce4ec;display:flex;justify-content:space-between;font-size:11px}.showcase-top span{color:#92a3b5}
+.showcase-body{padding:28px}.showcase-phone .showcase-body{padding:20px}.showcase-body small{font-size:9px;letter-spacing:.16em;color:#587e9c}.showcase-body h3{font-size:clamp(26px,3vw,42px);margin:14px 0;letter-spacing:-.04em}.showcase-body p{font-size:12px;color:#667687;max-width:360px;line-height:1.6}
+.showcase-pills{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0}.showcase-pills span{font-size:10px;padding:8px;background:#e5edf3;border-radius:6px}.showcase-lines{display:grid;gap:9px}.showcase-lines i{height:10px;background:#e4eaf0;border-radius:4px}.showcase-lines i:nth-child(2){width:80%}.showcase-lines i:nth-child(3){width:55%}
+.showcase-figure figcaption{font-size:11px;color:var(--muted);padding:11px 20px}.case-study .showcase-figure{margin-bottom:48px}
+@media(max-width:700px){.skill-matrix{grid-template-columns:repeat(3,minmax(0,1fr))}.skill-cell{min-height:126px}.skill-graphic{width:50px;height:50px}.skill-graphic img{width:47px;height:47px}.skill-letters{width:46px;height:46px}.showcase-stage{min-height:290px;padding:24px}}

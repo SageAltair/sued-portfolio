@@ -306,4 +306,27 @@ nudge:[
 };
 const priorWorkDetail=workDetail;
 workDetail=function(id){const html=priorWorkDetail(id);const sections=projectDeepDive[id];if(!sections)return html;const additional='<div class="article-kicker">DEEPER DESIGN NOTES</div>'+sections.map(([heading,body])=>'<h2>'+esc(heading)+'</h2><p>'+esc(body)+'</p>').join('');return html.replace('<div class="article-kicker">07 / EVIDENCE AND LIMITATIONS</div>',additional+'<div class="article-kicker">07 / EVIDENCE AND LIMITATIONS</div>')};
+
+const skillSections=[
+['Programming & frameworks',[['Python','python'],['JavaScript','javascript'],['TypeScript','typescript'],['React','react'],['FastAPI','fastapi'],['Django',null],['Flutter','flutter'],['Java','java'],['C++','cplusplus'],['PHP','php'],['HTML5','html5'],['CSS3','css3'],['Node.js','nodejs'],['Solidity','solidity']]],
+['Data, development & platforms',[['PostgreSQL','postgresql'],['MySQL','mysql'],['Docker','docker'],['Git','git'],['GitHub','github'],['Linux','linux'],['VS Code','vscode'],['Android','android'],['Firebase','firebase'],['Windows Server',null]]],
+['Networking & cybersecurity',[['Wireshark','wireshark'],['Nmap',null],['Burp Suite',null],['Metasploit',null],['Nessus',null],['Aircrack-ng',null],['Active Directory',null],['Network security',null],['Cryptography',null],['Virtualization',null],['SDN / WLAN',null]]],
+['AI & product development',[['AI API integration',null],['REST API design',null],['AI workflows',null],['Testing & debugging',null],['Human-centered design',null],['UX research',null],['Product prototyping',null],['Technical research',null]]],
+['Professional & interpersonal',[['Training facilitation',null],['Public speaking',null],['Stakeholder engagement',null],['Project coordination',null],['Team collaboration',null],['Communication',null],['Problem solving',null],['Strategic thinking',null],['Adaptability',null],['Leadership',null]]],
+['Creative exploration',[['Storytelling',null],['Writing',null],['Filmmaking',null],['Animation',null],['Visual design',null],['Psychology',null],['Entrepreneurship',null],['Creative direction',null]]]
+];
+function skillsGallery(){return '<section class="section skills-gallery"><div class="article-kicker">03 / CAPABILITIES</div><h2>Skills, tools and ways of working.</h2><p class="skills-disclaimer">An overview of practical experience, academic exposure, and developing interests. These do not all represent the same level of proficiency.</p>'+skillSections.map(([heading,items])=>'<div class="skill-group"><h3>'+esc(heading)+'</h3><div class="skill-matrix">'+items.map(([name,slug])=>'<div class="skill-cell"><div class="skill-graphic">'+(slug?'<img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/icons/'+slug+'/'+slug+'-original.svg" alt=""><span class="skill-letters" style="display:none">'+esc(name.slice(0,2).toUpperCase())+'</span>':'<span class="skill-letters">'+esc(name.split(/[ -]/).map(x=>x[0]).slice(0,2).join(''))+'</span>')+'</div><span>'+esc(name)+'</span></div>').join('')+'</div></div>').join('')+'</section>'}
+const aboutOriginal=about;
+about=function(){let h=aboutOriginal();let start=h.indexOf('03 / Capabilities');let end=h.indexOf('04 / Moments');if(start<0||end<0)return h;let a=h.lastIndexOf('<section',start);let b=h.lastIndexOf('<section',end);return h.slice(0,a)+skillsGallery()+h.slice(b)};
+const showcase={
+orin:['Orin','Connected personal workspace','Projects','Tasks','Writing'],
+'small-voice':['The Small Voice','Bilingual digital learning','Discover','Learn','Reflect'],
+zaburi:['Zaburi','A calmer Android home screen','Psalms','Apps','Personalize'],
+'oddly-bible':['Oddly Bible','Offline-first reading','Read','Search','Notes'],
+nudge:['NUDGE','Intentional reminders','Plan','Prompt','Snooze']
+};
+function projectShowcase(p){let d=showcase[p.id];let mobile=['zaburi','oddly-bible','small-voice'].includes(p.id);return '<figure class="showcase-figure"><div class="showcase-stage"><div class="showcase-device '+(mobile?'showcase-phone':'showcase-desktop')+'"><div class="showcase-screen"><div class="showcase-top"><strong>'+esc(d[0])+'</strong><span>•••</span></div><div class="showcase-body"><small>PRODUCT CONCEPT</small><h3>'+esc(d[0])+'</h3><p>'+esc(d[1])+'</p><div class="showcase-pills">'+d.slice(2).map(x=>'<span>'+esc(x)+'</span>').join('')+'</div><div class="showcase-lines"><i></i><i></i><i></i></div></div></div></div></div><figcaption>Illustrative interface concept, not an actual application screenshot.</figcaption></figure>'}
+workCard=function(p){return '<article class="showcase-card">'+projectShowcase(p)+'<div class="showcase-copy"><div class="article-kicker">'+esc(p.tag)+' / '+esc(p.status)+'</div><h2>'+esc(p.name)+'</h2><p>'+esc(p.summary)+'</p><div class="showcase-stack">'+p.stack.slice(0,4).map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'+link('#/work/'+p.id,'Explore project','text-link')+'</div></article>'};
+const detailedWork=workDetail;
+workDetail=function(id){let p=projects.find(x=>x.id===id);if(!p)return notFound();return detailedWork(id).replace('<article class="detail editorial-article">','<article class="detail editorial-article">'+projectShowcase(p))};
 render();
