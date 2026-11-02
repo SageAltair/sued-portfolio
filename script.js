@@ -82,4 +82,119 @@ function journalDetail(id){const p=posts.find(x=>x.id===id);if(!p)return notFoun
 
 
 
+
+
+// Original editorial articles. These are first-person reflections, not externally published research.
+const longform={
+'building-reliable-ai':{
+dek:'A working demo is the beginning of an engineering argument, not its conclusion. What happens when the system meets an ordinary Tuesday?',
+read:'4 min read',
+sections:[
+['The seductive simplicity of a demo',[
+'It is surprisingly easy to make an AI product look capable for thirty seconds. Enter a prompt, receive a fluent answer, and watch the interface respond. The visible moment feels complete because the language is complete. Yet the actual product has barely been tested. What happens if the network drops? What if a response arrives twice? What if a task is saved but never appears in the list? These are not peripheral engineering questions. They are the experience the user will remember.',
+'Building Orin has forced me to separate an attractive interaction from a dependable workflow. A personal workspace makes promises every time it accepts an instruction. If I tell it to remember a deadline, I am not asking for a pleasant animation. I am trusting it with a future obligation. That trust should be earned through observable behavior.'
+]],
+['The invisible contract',[
+'I now think about AI features as a series of states rather than a single magical response. A user expresses an intention. The system interprets it. A plan may be proposed. An action may be authorized. Only then can an execution be attempted, checked, and reported. Blurring those stages makes the product feel faster, but it also makes errors harder to detect.',
+'Consider the sentence “I have scheduled your reminder.” It should mean that the scheduling operation actually succeeded, not merely that a model generated a plausible confirmation. A reliable interface distinguishes a suggestion from a saved record, and a saved record from a notification that has reached the operating system. The words on screen should match the evidence.'
+]],
+['Testing the whole journey',[
+'Unit tests matter, but they cannot answer every question. A passing function test may prove that a date is formatted correctly. It does not prove that a user can set a specific time, navigate away, return, and still find the task. Nor does it prove that Windows displayed the notification when the scheduled moment arrived.',
+'For that reason, I am trying to build smaller, deterministic acceptance journeys. Create a task with a date and time. Save it. Reload the page. Find it from the complete task list. Verify the stored schedule. Observe the reminder delivery separately. When a step fails, identify exactly which boundary failed rather than calling the entire feature “broken.” This is slower than celebrating a screenshot, but it produces useful knowledge.'
+]],
+['Resisting unnecessary intelligence',[
+'There is another discipline in building AI software: knowing when not to use AI. A deterministic database operation should not become a probabilistic conversation merely because a model is available. Clear forms, explicit confirmations, and ordinary search can be more helpful than a clever assistant that guesses.',
+'I am interested in systems that can surprise people in useful ways, but surprise must never replace control. A product can be imaginative in how it helps and conservative in how it handles data. That combination is more difficult than either quality alone.'
+]],
+['What I am carrying forward',[
+'My standard for progress is changing. A feature is not finished because its code exists or its demonstration works once. It becomes credible when the important journeys can be repeated, failures are understandable, and the person using it knows what has actually happened.',
+'That is the engineering direction I want Orin to follow. Less theatrical certainty. More visible state, testable behavior, and promises that survive ordinary use.'
+]]
+]
+},
+'technology-and-habits':{
+dek:'A phone launcher is a small piece of software with an enormous amount of influence. Designing one around a meaningful habit reveals an uncomfortable question: when does a helpful reminder become another distraction?',
+read:'4 min read',
+sections:[
+['The place we return to',[
+'The home screen is not a destination people carefully choose every morning. It is a surface they pass through dozens of times while doing something else. That makes it a powerful design space. A message placed there does not have to compete for a separate appointment in the calendar. It meets the user during an existing routine.',
+'Zaburi Launcher began with that observation. I wanted to explore whether Scripture could become a gentle part of ordinary phone use, especially through the Psalms. The idea was not to build another app demanding attention, but to change what the person encounters in a moment that already exists.'
+]],
+['The difference between presence and pressure',[
+'A verse can invite reflection, but an invitation loses its character when it becomes an interruption. Software has many ways to demand a reaction: notifications, streaks, urgent colors, and little rewards for returning. These mechanisms may increase engagement while reducing the freedom to decide what deserves attention.',
+'I do not want Zaburi to borrow every habit-forming trick from social applications. The design challenge is to make something meaningful available without punishing the user for ignoring it. A good experience should still allow someone to unlock the phone, answer a message, and continue their day without friction.'
+]],
+['The launcher still has a job',[
+'This sounds obvious until implementation begins: a launcher must work as a launcher. People need to find applications, move between tasks, and rely on familiar navigation. A beautiful wallpaper cannot compensate for a broken recent-apps control. A thoughtful verse cannot justify a home screen that is difficult to use.',
+'Testing has made this constraint concrete. Android devices differ in how they handle default launcher behavior, installation, permissions, and system navigation. The product has to be tested on real hardware, not only judged from screenshots. Compatibility work is not glamorous, but it protects the central idea from becoming an inconvenience.'
+]],
+['Designing a quieter interaction',[
+'My working hypothesis is that an ambient experience may be more sustainable than an intrusive one. The verse should be readable, visually calm, and easy to change. The surrounding interface should remain functional. Personalization should serve readability and meaning, not encourage endless adjustment.',
+'This is not yet a proven behavioral intervention. I have not established that the launcher changes reading habits or spiritual outcomes. It is a product experiment grounded in a design question, and its claims should remain at that level until real usage provides evidence.'
+]],
+['The question worth testing',[
+'If someone lives with this launcher for a week, do they find it useful or do they work around it? Does it make an intentional moment easier, or does it become background decoration? Would they keep using it if nobody asked them to?',
+'Those questions are more important than download counts in an early prototype. The aim is to discover whether technology can support a practice without colonizing the attention it claims to protect.'
+]]
+]
+},
+'learning-in-public':{
+dek:'Learning to build software is not a collection of technologies to memorize. It is the slow acquisition of judgment about what to build, how to test it, and when to simplify.',
+read:'4 min read',
+sections:[
+['From knowing tools to building systems',[
+'I used to think of technical growth mainly in terms of languages and frameworks. Python, JavaScript, React, FastAPI, Flutter, databases: each new tool appeared to unlock a new category of possibility. They do matter. But the deeper challenge begins when several of them must work together reliably.',
+'A web interface can look complete while the API has inconsistent contracts. An API can respond correctly while the database stores the wrong time zone. A mobile prototype can compile while failing on the phone a person actually owns. Learning to see the boundaries between these components has become more valuable to me than adding another item to a skills list.'
+]],
+['Projects reveal the missing lessons',[
+'Orin has taught me about state, scheduling, integration, and the difference between automated test results and real-world acceptance. Zaburi has exposed Android-specific constraints that are invisible in a mockup. The Small Voice raises questions about accessible learning, language, and what happens when connectivity is limited.',
+'These projects are not evidence that I have mastered every domain they touch. They are the environments in which I am learning to reason. Each obstacle gives me a more specific question to study, and each question is more useful than a vague ambition to “learn AI.”'
+]],
+['Why people belong in the engineering conversation',[
+'I am equally interested in psychology, storytelling, and design because the user never experiences a database or a framework directly. They experience a decision: where to click, what to trust, whether to return, whether a message makes sense. A technically correct feature can still impose unnecessary cognitive work.',
+'This is especially visible in training and community work. A person may have limited bandwidth, a shared device, unfamiliar terminology, or very little time. Good design takes those constraints seriously. It is not a decorative layer added after the engineering is finished.'
+]],
+['Learning without performing expertise',[
+'There is pressure to present every experiment as a success and every interest as a specialization. I want this journal to resist that pressure. A failed notification test is useful information. A design that looked good but confused users is a reason to revise. An unfinished project can still be worth discussing if its status is described clearly.',
+'I would rather explain one technical trade-off accurately than publish a polished paragraph filled with claims I cannot support. The internet has enough confident summaries. I want my writing to show the reasoning behind decisions.'
+]],
+['The kind of builder I want to become',[
+'My direction is to become capable of making intelligent software that is dependable, accessible, and creatively distinctive. That requires engineering discipline and a willingness to study human behavior. It also requires patience: build a small thing, test it honestly, learn what the result means, and improve it.',
+'If this journal succeeds, it will not read like a trophy cabinet. It will become a record of changing assumptions, better questions, and concrete work.'
+]]
+]
+}
+};
+const projectVisuals={
+orin:{title:'Orin / Product architecture',nodes:['Capture intention','Organize tasks and projects','Plan and schedule','Verify execution'],caption:'Conceptual workflow diagram, not a screenshot of the application.'},
+'small-voice':{title:'The Small Voice / Learning journey',nodes:['Discover a story','Learn a principle','Reflect and practice','Return and continue'],caption:'Proposed learner journey, not a finished product screen.'},
+zaburi:{title:'Zaburi / Everyday interaction',nodes:['Unlock phone','Encounter a Psalm','Choose to reflect','Continue normal use'],caption:'Conceptual user flow, not a screenshot of the Android launcher.'},
+'oddly-bible':{title:'Oddly Bible / Offline reading',nodes:['Open local text','Read and navigate','Highlight or note','Save on device'],caption:'Planned offline reading flow, not a released interface.'},
+nudge:{title:'NUDGE / Reminder concept',nodes:['Recognize context','Offer opt-in prompt','User chooses action','Respect dismissal'],caption:'Exploratory interaction model, not an implemented feature claim.'}
+};
+const journalVisuals={
+'building-reliable-ai':{title:'The reliability gap',nodes:['User intent','Persisted state','System action','Observed outcome'],caption:'An original editorial diagram illustrating the stages a reliable workflow must verify.'},
+'technology-and-habits':{title:'A quieter habit loop',nodes:['Existing routine','Gentle invitation','Free choice','Return to task'],caption:'An original conceptual illustration of a non-intrusive interaction.'},
+'learning-in-public':{title:'The learning cycle',nodes:['Build','Observe','Question','Improve'],caption:'An original diagram of iterative, evidence-led learning.'}
+};
+function editorialDiagram(spec){
+ const labels=spec.nodes.map((n,i)=>'<div class="diagram-step"><span class="diagram-number">0'+(i+1)+'</span><strong>'+esc(n)+'</strong></div>').join('');
+ return '<figure class="concept-figure" role="group" aria-label="'+esc(spec.title)+'"><div class="concept-art"><div class="concept-label">ORIGINAL CONCEPTUAL DIAGRAM</div><h3>'+esc(spec.title)+'</h3><div class="diagram-flow">'+labels+'</div></div><figcaption>'+esc(spec.caption)+'</figcaption></figure>';
+}
+function workCard(p){
+ const d=projectEditorial[p.id],v=projectVisuals[p.id];
+ return '<article class="work-card editorial-work"><div class="category">'+esc(p.tag)+' / '+esc(p.status)+'</div><div class="editorial-work-inner"><div><h3>'+esc(p.name)+'</h3><p>'+esc(p.summary)+'</p><p class="work-context">'+esc(d.context)+'</p>'+link('#/work/'+p.id,'Read case study','text-link')+'</div>'+editorialDiagram(v)+'</div></article>';
+}
+function workDetail(id){
+ const p=projects.find(x=>x.id===id);if(!p)return notFound();const d=projectEditorial[id],v=projectVisuals[id];
+ return '<div class="container"><div class="page-hero editorial-heading">'+eyebrow(p.tag+' / '+p.status)+'<h1>'+esc(p.name)+'</h1><p class="lead">'+esc(p.summary)+'</p><div class="pill-list">'+p.stack.map(x=>'<span class="pill">'+esc(x)+'</span>').join('')+'</div>'+link('#/work','All projects')+'</div><article class="detail editorial-article">'+editorialDiagram(v)+'<div class="article-kicker">01 / THE CONTEXT</div><h2>The problem behind the product</h2><p>'+esc(d.context)+'</p><p>'+esc(p.problem)+'</p><div class="article-kicker">02 / DESIGN RESPONSE</div><h2>Product decisions</h2><p>'+esc(p.approach)+'</p>'+editorialList(d.decisions)+'<div class="article-kicker">03 / TECHNICAL APPROACH</div><h2>How the system is being built</h2><p>'+esc(d.implementation)+'</p><p><strong>Technologies and methods:</strong> '+p.stack.map(esc).join(', ')+'.</p><div class="article-kicker">04 / TRADE-OFFS</div><h2>What makes the problem difficult</h2><p>'+esc(d.tradeoffs)+'</p><div class="article-kicker">05 / NEXT MILESTONE</div><h2>What I need to prove next</h2><p>'+esc(d.next)+'</p><div class="status-note"><strong>Verified presentation status: '+esc(p.status)+'.</strong> '+esc(p.note)+' This article describes the work and design intent, not independently verified performance metrics.</div>'+(p.link?'<p><a class="text-link" target="_blank" rel="noopener noreferrer" href="'+p.link+'">View source repository</a></p>':'')+'</article></div>';
+}
+function postCard(p){
+ const a=longform[p.id];return '<article class="journal-card editorial-note"><div class="article-kicker">'+esc(p.tag)+' / '+esc(p.date)+' / '+esc(a.read)+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(a.dek)+'</p>'+link('#/journal/'+p.id,'Read article','text-link')+'</article>';
+}
+function journalDetail(id){
+ const p=posts.find(x=>x.id===id);if(!p)return notFound();const a=longform[id];
+ return '<div class="container"><div class="page-hero editorial-heading">'+eyebrow(p.tag+' / '+p.date+' / '+a.read)+'<h1>'+esc(p.title)+'</h1><p class="lead">'+esc(a.dek)+'</p>'+link('#/journal','All articles')+'</div><article class="detail editorial-article">'+editorialDiagram(journalVisuals[id])+'<div class="article-meta">A PERSONAL FIELD ESSAY / '+esc(p.date)+'</div>'+a.sections.map((sec,i)=>'<section class="essay-section"><div class="article-kicker">'+String(i+1).padStart(2,'0')+' / ESSAY</div><h2>'+esc(sec[0])+'</h2>'+sec[1].map(x=>'<p>'+esc(x)+'</p>').join('')+'</section>').join('')+'<div class="status-note">Written as a first-person reflection on ongoing work. Illustrations are original conceptual diagrams, not photographs of completed products or research figures.</div></article></div>';
+}
+function journal(){const featured=posts[0];return '<div class="container"><div class="page-hero">'+eyebrow('Writing / Field essays')+'<h1>Ideas worth examining.</h1><p class="lead">Long-form reflections on software engineering, attention, learning, and the human decisions behind technology.</p></div><section class="journal-feature">'+editorialDiagram(journalVisuals[featured.id])+'<div class="article-kicker">FEATURED ESSAY / '+esc(featured.date)+'</div><h2>'+esc(featured.title)+'</h2><p class="lead">'+esc(longform[featured.id].dek)+'</p>'+link('#/journal/'+featured.id,'Read the article','text-link')+'</section><section class="section"><div class="article-kicker">MORE WRITING</div><div class="journal-index">'+posts.slice(1).map(postCard).join('')+'</div></section></div>'}
 render();

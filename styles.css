@@ -23,3 +23,29 @@
 .essay-section{padding:8px 0 20px;border-top:1px solid var(--line)}
 .status-note{border-left:3px solid var(--accent);background:var(--paper);padding:22px 25px;margin:50px 0;font-size:14px;line-height:1.8}
 @media(max-width:760px){.editorial-work{grid-column:span 1}.editorial-work-inner{grid-template-columns:1fr}.editorial-work img{height:220px}.editorial-article{margin-bottom:60px}}
+
+/* Project-specific diagrams replace unrelated portrait photography. */
+.concept-figure{margin:0 0 52px}
+.concept-art{background:var(--paper);border:1px solid var(--line);padding:clamp(22px,4vw,48px);min-height:270px;display:flex;flex-direction:column;justify-content:center}
+.concept-label{font-size:10px;letter-spacing:.19em;color:var(--muted);font-weight:700}
+.concept-art h3{font-size:clamp(23px,3vw,39px);margin:18px 0 30px;letter-spacing:-.035em}
+.diagram-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.diagram-step{border-top:2px solid var(--accent);padding:15px 3px 8px;min-height:100px}
+.diagram-number{display:block;color:var(--accent);font-size:12px;font-weight:700;margin-bottom:10px}
+.diagram-step strong{font-size:clamp(12px,1.25vw,15px);line-height:1.45;display:block;font-weight:600}
+.concept-figure figcaption{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}
+.editorial-work .concept-figure{margin:0}
+.editorial-work .concept-art{min-height:250px;padding:26px}
+.editorial-work .diagram-flow{grid-template-columns:repeat(2,1fr)}
+.editorial-work .diagram-step{min-height:72px}
+.essay-section p{margin-bottom:24px}
+@media(max-width:520px){.diagram-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.concept-art{min-height:0}.editorial-work .concept-art{min-height:0}}
+
+.journal-feature{padding:0 0 100px;max-width:900px}
+.journal-feature .concept-figure{margin-bottom:38px}
+.journal-feature h2{max-width:790px}
+.journal-feature .lead{margin-bottom:25px}
+.journal-index{display:block;max-width:900px}
+.journal-index .editorial-note{padding:36px 0;border-top:1px solid var(--line)}
+.journal-index .editorial-note h3{max-width:760px}
+.journal-index .editorial-note p{max-width:720px}
