@@ -197,4 +197,113 @@ function journalDetail(id){
  return '<div class="container"><div class="page-hero editorial-heading">'+eyebrow(p.tag+' / '+p.date+' / '+a.read)+'<h1>'+esc(p.title)+'</h1><p class="lead">'+esc(a.dek)+'</p>'+link('#/journal','All articles')+'</div><article class="detail editorial-article">'+editorialDiagram(journalVisuals[id])+'<div class="article-meta">A PERSONAL FIELD ESSAY / '+esc(p.date)+'</div>'+a.sections.map((sec,i)=>'<section class="essay-section"><div class="article-kicker">'+String(i+1).padStart(2,'0')+' / ESSAY</div><h2>'+esc(sec[0])+'</h2>'+sec[1].map(x=>'<p>'+esc(x)+'</p>').join('')+'</section>').join('')+'<div class="status-note">Written as a first-person reflection on ongoing work. Illustrations are original conceptual diagrams, not photographs of completed products or research figures.</div></article></div>';
 }
 function journal(){const featured=posts[0];return '<div class="container"><div class="page-hero">'+eyebrow('Writing / Field essays')+'<h1>Ideas worth examining.</h1><p class="lead">Long-form reflections on software engineering, attention, learning, and the human decisions behind technology.</p></div><section class="journal-feature">'+editorialDiagram(journalVisuals[featured.id])+'<div class="article-kicker">FEATURED ESSAY / '+esc(featured.date)+'</div><h2>'+esc(featured.title)+'</h2><p class="lead">'+esc(longform[featured.id].dek)+'</p>'+link('#/journal/'+featured.id,'Read the article','text-link')+'</section><section class="section"><div class="article-kicker">MORE WRITING</div><div class="journal-index">'+posts.slice(1).map(postCard).join('')+'</div></section></div>'}
+
+// Additional evidence-grounded case study material. All screenshots are deliberately omitted
+// until captured from a verified product state, rather than substituted with portraits.
+const caseStudyEvidence={
+orin:{
+overview:'Orin is a working software repository, not simply a product idea. Its documented architecture separates a React and TypeScript web client, an Expo and React Native mobile client, a FastAPI application, a PostgreSQL database, a device worker, and shared API contracts. The product spans Tasks, Projects, Calendar, Writing, Activity, and an optional AI command interpreter. These areas share authentication and workspace boundaries, which makes cross-feature consistency an engineering requirement.',
+system:['React / TypeScript / Vite web interface','FastAPI domain services and validated API contracts','PostgreSQL / SQLAlchemy / Alembic persistence','Optional AI provider adapters and restricted commands','Opt-in device worker and notification channels'],
+flow:'The AI command path is deliberately constrained. A natural-language request passes through a provider adapter, returns a structured proposal, undergoes schema and ownership validation, and can only invoke a predefined set of task and project actions. Provider output does not grant itself permission to run arbitrary SQL or shell commands. This boundary matters because language-model fluency is not an authorization mechanism.',
+verification:'The repository documents automated checks and a dedicated verification workflow. That is evidence of engineering infrastructure, not proof that every user journey works. The outstanding questions include real-account task persistence, Windows notification delivery, focus behavior, and Android device behavior. I present those as open acceptance gates rather than completed capabilities.',
+source:'https://github.com/SageAltair/Orin/blob/main/README.md',
+sourceLabel:'Read the documented architecture'
+},
+'small-voice':{
+overview:'The Small Voice is a bilingual digital discipleship and learning concept informed by work with digital ministry and training teams. Its intended audience includes people who may be learning on a phone, returning to lessons intermittently, or using limited connectivity. The product idea is to combine structured learning, stories, reflection, and a path toward practical application rather than simply accumulate content.',
+system:['Visitor, learner, and administrator journeys','Swahili and English content presentation','Progressive learning sequences','Reflection and practical exercises','Low-bandwidth and offline-aware design goals'],
+flow:'A learner should be able to encounter a relevant story, understand a principle, reflect on a question, try a small action, and return without losing their place. This proposed journey gives the content a beginning, middle, and continuation. It is a design specification, not a claim that each step has been released.',
+verification:'The concept and development direction are established, but this portfolio does not yet contain verified production screenshots, a public deployment, or independently measured learning outcomes. Those should be added only after the corresponding flows can be demonstrated.',
+source:null,sourceLabel:null
+},
+zaburi:{
+overview:'Zaburi Launcher explores a specific intervention in an existing daily behavior: unlocking and navigating an Android phone. Rather than ask users to remember a separate reading session, the launcher makes a Psalm available on the home screen. The core product challenge is preserving normal phone usability while adding a meaningful moment of reflection.',
+system:['Flutter-based Android launcher','Psalm-focused wallpaper and verse presentation','Home screen and application navigation','Device-specific launcher and permissions behavior','Physical Android testing'],
+flow:'The experience begins with the ordinary act of returning to the home screen. A verse is visible, but it does not block access to applications. A person can pause to read or simply continue. The launcher must remain dependable for app access and navigation; a meaningful message cannot excuse broken core phone behavior.',
+verification:'A prototype has been tested on devices. Launcher navigation, compatibility, and installation behavior have required troubleshooting. No claim is made that the application is approved for broad distribution or that it has been shown to improve reading habits.',
+source:null,sourceLabel:null
+},
+'oddly-bible':{
+overview:'Oddly Bible is an offline-first reading project motivated by the practical limitations of connection-dependent tools. The intended experience centers on text: versions, navigation, searching, highlighting, bookmarking, and notes, without turning the reading surface into a crowded control panel.',
+system:['Flutter mobile interface','Locally available reading text','Version and language selection','Notes, bookmarks, and highlights','Offline search and persistence goals'],
+flow:'The desired journey is intentionally quiet: open a passage, read without waiting for a network request, make a note if needed, and return later with the reading context intact. Offline capability changes the engineering requirements because storage, indexing, and migration become part of the product experience.',
+verification:'The reader is in development. The full offline data pipeline, note persistence, and complete device-level acceptance need independent verification before being presented as production-ready.',
+source:null,sourceLabel:null
+},
+nudge:{
+overview:'NUDGE begins with an uncomfortable observation: a reminder can be delivered successfully and still be useless. The concept explores whether a companion with context and personality can help someone return to an intention without creating another noisy notification system.',
+system:['Windows companion concept','Opt-in interruption model','User-controlled reminders and dismissals','Behavioral interaction experiments','Explicit privacy and attention boundaries'],
+flow:'A prompt should begin with a user-approved intention, consider whether interruption is appropriate, present a clear action, and accept dismissal. The user must remain able to disable or limit the experience. This is an interaction hypothesis, not a deployed behavioral engine.',
+verification:'NUDGE remains conceptual. There is no published evidence here of effectiveness, retention, or a released application. The first meaningful milestone would be a narrow prototype tested for both usefulness and annoyance.',
+source:null,sourceLabel:null
+}
+};
+function workDetail(id){
+ const p=projects.find(x=>x.id===id);if(!p)return notFound();
+ const d=projectEditorial[id],e=caseStudyEvidence[id];
+ return '<div class="container case-study"><div class="page-hero editorial-heading">'+eyebrow('CASE STUDY / '+p.tag)+'<h1>'+esc(p.name)+'</h1><p class="lead">'+esc(p.summary)+'</p><div class="case-meta"><span>'+esc(p.status)+'</span><span>'+esc(p.stack.join(' / '))+'</span></div>'+link('#/work','All projects')+'</div><article class="detail editorial-article"><div class="article-kicker">01 / PRODUCT CONTEXT</div><h2>What this project is really about</h2><p>'+esc(e.overview)+'</p><p>'+esc(d.context)+'</p><div class="article-kicker">02 / PROBLEM DEFINITION</div><h2>Why it needs to exist</h2><p>'+esc(p.problem)+'</p><p>'+esc(d.tradeoffs)+'</p><div class="article-kicker">03 / PRODUCT SYSTEM</div><h2>The components and their responsibilities</h2><div class="system-spec"><div class="system-title">SYSTEM BREAKDOWN / '+esc(p.name)+'</div>'+e.system.map((v,i)=>'<div class="system-row"><span>'+String(i+1).padStart(2,'0')+'</span><strong>'+esc(v)+'</strong></div>').join('')+'</div><p class="figure-note">This is an editorial breakdown of documented or planned components. It is not a screenshot of a running application.</p><div class="article-kicker">04 / DESIGN DECISIONS</div><h2>Decisions that shape the experience</h2>'+editorialList(d.decisions)+'<div class="article-kicker">05 / USER AND SYSTEM FLOW</div><h2>How the experience should work</h2><p>'+esc(e.flow)+'</p>'+editorialDiagram(projectVisuals[id])+'<div class="article-kicker">06 / IMPLEMENTATION</div><h2>Engineering approach</h2><p>'+esc(d.implementation)+'</p><div class="article-kicker">07 / EVIDENCE AND LIMITATIONS</div><h2>What has been verified, and what has not</h2><p>'+esc(e.verification)+'</p><div class="status-note"><strong>Current status: '+esc(p.status)+'.</strong> '+esc(p.note)+'</div><div class="article-kicker">08 / NEXT ITERATION</div><h2>What comes next</h2><p>'+esc(d.next)+'</p>'+(e.source?'<p><a class="text-link" href="'+e.source+'" target="_blank" rel="noopener noreferrer">'+esc(e.sourceLabel)+'</a></p>':'')+'</article></div>';
+}
+// Expand essays with analytical sections and concrete examples rather than changing their labels.
+const essayAdditions={
+'building-reliable-ai':[
+['A small failure that explains a large problem',[
+'Imagine creating a task for 9:30 in the morning. The form accepts the time, the API returns a successful response, and the task appears in a list. It is tempting to mark the feature complete. But there are at least four independent claims hiding inside that apparent success: the time was stored correctly, the correct workspace owns the task, a scheduler can retrieve the task when it is due, and a notification can actually reach the user. Each claim needs a different kind of evidence.',
+'This distinction has practical consequences. If the task disappears after reloading, the problem is persistence or retrieval. If it survives but the notification does not appear, the investigation moves to the scheduler, companion process, or operating-system delivery. Without these boundaries, debugging becomes a cycle of guesses. With them, a failure can become a precise engineering question.'
+]],
+['The interface is part of the proof',[
+'A product cannot be called reliable if its users cannot inspect what it has done. A task manager should expose due dates and times in a readable form, make the complete task list discoverable, and distinguish a scheduled reminder from one that has already fired. This is not merely visual polish. It is an interface for accountability.',
+'The same principle applies to AI actions. If the system proposes creating a project, the user should understand what will be created and where. If the action fails, the message should say so. Language that sounds confident but conceals uncertainty is a product defect, even when the underlying model is functioning exactly as designed.'
+]],
+['What I would measure',[
+'I would start with completion rates for a few critical journeys, not broad engagement numbers. Can someone create and retrieve a task with a specific time? Can they edit it without losing unrelated information? Does a reminder arrive under the conditions the product promises? How often does an action need to be retried? These are measurements that expose whether the product is useful.',
+'I would also examine the cost of recovery. A system that occasionally fails but explains what happened and preserves user work may be more trustworthy than one that fails silently. Reliability is not the absence of every error; it is the disciplined handling of errors before they become someone else’s problem.'
+]]
+],
+'technology-and-habits':[
+['The attention budget',[
+'Every new element on a home screen has a cost. A large quotation may be beautiful but make app labels difficult to read. An animation may create delight once and become exhausting after the twentieth unlock. A new gesture may be clever but conflict with muscle memory. These are small design decisions with repeated consequences.',
+'The right question is not whether an element is attractive in isolation. It is whether it earns its place in a daily environment. That means evaluating legibility, accessibility, navigation speed, and the freedom to ignore the message. A launcher should help someone move through their day, not make them admire its design before they can answer a call.'
+]],
+['What a useful test could look like',[
+'I would compare ordinary phone use with a period using Zaburi, asking participants to complete common tasks such as opening the camera, switching applications, and finding a frequently used app. I would record friction and errors before asking whether the verse presentation felt meaningful. Otherwise, a positive reaction to the idea could hide poor usability.',
+'I would also ask a quieter question after several days: did the verse become a useful invitation, or did it fade into visual wallpaper? The answer may lead to less frequent changes, better typography, or a simpler layout. The purpose of testing is to allow the product to contradict its creator.'
+]]
+],
+'learning-in-public':[
+['The difference between activity and progress',[
+'Writing code for hours can feel productive even when the important question remains unanswered. I have learned to ask what a session will prove. Will it establish that a saved record survives a reload? Will it isolate a device-specific error? Will it make a workflow simpler for a new user? A measurable outcome changes how I choose tasks.',
+'This approach also exposes uncomfortable truths. Adding a feature may be easier than removing a confusing one. Rewriting a screen may be more satisfying than documenting a failure. But progress is not the amount of code changed; it is the amount of uncertainty removed from an important problem.'
+]],
+['What I want to publish next',[
+'Future entries should include more primary evidence: screenshots of actual product states, small architecture excerpts, before-and-after interaction decisions, and test outcomes. A claim about a design improvement should be accompanied by a description of what changed and why. A claim about reliability should identify the journey that was tested.',
+'That is the standard I want this portfolio to grow into. Writing should be an extension of building, not a substitute for it. The most interesting article may begin with something that did not work.'
+]]
+]
+};
+for(const [id,sections] of Object.entries(essayAdditions)){longform[id].sections.splice(longform[id].sections.length-1,0,...sections)}
+
+const projectDeepDive={
+orin:[
+['A practical journey','A user starts by collecting a commitment in a task, connects it to a project or workspace, chooses a date and time, and later expects the system to preserve and surface that commitment. That journey crosses the interface, API, persistence layer, scheduling logic, and notification delivery. A defect at any boundary can make the entire experience feel unreliable. The product therefore needs clear state, discoverable task lists, and tests that exercise the journey rather than only individual functions.'],
+['A difficult boundary','Orin also accepts optional AI-assisted commands. The important design choice is to keep natural-language interpretation separate from authorization. A provider may propose an action, but the backend must validate it against allowed commands and entity ownership. This is a concrete example of using AI to improve convenience without treating generated text as trusted code.']
+],
+'small-voice':[
+['Learning beyond the content library','A content library can answer the question “What can I read?” without answering “What should I do next?” The Small Voice is designed around the second question. A lesson should connect to a reflection, a practice, and a meaningful continuation. That requires content design as well as software design: sequencing, appropriate language, and feedback that respects the learner.'],
+['Designing for the actual environment','Swahili-first content, intermittent connectivity, and mobile-first reading are not small localization tasks to add at the end. They influence navigation, media weight, offline progress, and the structure of each lesson. A successful first prototype would prove one complete learner journey under realistic connection and device constraints before expanding into a large catalog.']
+],
+zaburi:[
+['The home screen is infrastructure','A launcher is unusually sensitive software because it sits between the user and almost every other application. Its primary responsibilities include finding apps, switching tasks, and preserving predictable navigation. Any additional feature must respect those responsibilities. For Zaburi, the Psalm is an invitation embedded within the infrastructure, not a reason to make the infrastructure harder to use.'],
+['What testing needs to establish','A meaningful evaluation should include basic navigation tasks, legibility under different wallpapers, app access, launcher persistence, and compatibility on actual Android devices. Only after those fundamentals work should the project ask whether the verse presentation encourages useful reflection. A positive response to the idea cannot compensate for friction in daily phone use.']
+],
+'oddly-bible':[
+['The data model shapes the reading experience','An offline Bible reader is not simply a screen that displays paragraphs. Versions need consistent identifiers for books, chapters, and verses. Bookmarks and notes must remain associated with the right passage. Search should work without a server, and the application should behave predictably when a user changes translations. These details shape both the storage model and the interface.'],
+['Why simplicity is a technical decision','Every additional tool competes with the text for space. Highlights, notes, search, and version switching should be discoverable without permanently crowding the reading surface. The design direction favors clear typography and reversible actions. The next useful evidence would be a device-tested reading flow showing that navigation, offline search, and saved annotations survive application restarts.']
+],
+nudge:[
+['An interruption has to justify itself','Most reminders are designed around delivery: send the message at the appointed time. But the person receiving it may be concentrating, resting, or dealing with something more important. A behavioral companion should therefore be judged by the quality of its timing and the clarity of its controls, not by how often it manages to appear.'],
+['A safer first experiment','The first prototype could focus on one user-selected commitment and one type of prompt. It would allow quiet hours, explicit snoozing, and permanent dismissal, then ask whether the interruption actually helped. This is deliberately narrower than the vision of a persistent companion. A small experiment can expose whether personality adds value or simply increases annoyance before more invasive capabilities are considered.']
+]
+};
+const priorWorkDetail=workDetail;
+workDetail=function(id){const html=priorWorkDetail(id);const sections=projectDeepDive[id];if(!sections)return html;const additional='<div class="article-kicker">DEEPER DESIGN NOTES</div>'+sections.map(([heading,body])=>'<h2>'+esc(heading)+'</h2><p>'+esc(body)+'</p>').join('');return html.replace('<div class="article-kicker">07 / EVIDENCE AND LIMITATIONS</div>',additional+'<div class="article-kicker">07 / EVIDENCE AND LIMITATIONS</div>')};
 render();

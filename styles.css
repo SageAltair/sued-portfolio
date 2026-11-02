@@ -49,3 +49,13 @@
 .journal-index .editorial-note{padding:36px 0;border-top:1px solid var(--line)}
 .journal-index .editorial-note h3{max-width:760px}
 .journal-index .editorial-note p{max-width:720px}
+
+.case-meta{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0 30px}
+.case-meta span{font-size:12px;padding:8px 12px;border:1px solid var(--line)}
+.system-spec{border-top:2px solid var(--accent);border-bottom:1px solid var(--line);margin:32px 0 8px}
+.system-title{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--accent);padding:18px 0}
+.system-row{display:grid;grid-template-columns:55px 1fr;gap:16px;border-top:1px solid var(--line);padding:19px 0;align-items:start}
+.system-row span{font-size:12px;color:var(--muted)}
+.system-row strong{font-size:17px;font-weight:500}
+.figure-note{font-size:12px!important;color:var(--muted);margin:10px 0 45px!important}
+.case-study .editorial-article>p{margin-bottom:25px}
