@@ -85,6 +85,5 @@
 .project-text-only h2{font-size:clamp(27px,4vw,43px);margin:15px 0}
 .project-text-only p{max-width:750px}
 .project-text-only .showcase-stack{margin:20px 0}
-/* Preserve the full portrait when the photograph is vertical or the subject is high in frame. */
-.portrait-stack img,.photo-grid img{object-fit:contain!important;object-position:center top!important;height:auto!important;max-height:none!important}
-.portrait-stack,.photo-grid{overflow:visible}
+/* Only the first Moments photograph (holding a microphone) gets a higher crop. */
+.photo-grid img:first-child{object-position:center top}
